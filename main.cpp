@@ -9,7 +9,7 @@ using std::cerr;
 using std::cout;
 using std::endl;
 
-const std::string kDmPrefix = "dynpart-";
+const std::string kDmPrefix = "";
 
 int main(int argc, char* argv[]) {
   if (argc != 2) {
