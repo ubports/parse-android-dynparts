@@ -200,7 +200,7 @@ void SetMetadataHeaderV0(LpMetadata* metadata) {
     }
 
     // Zero out all fields beyond LpMetadataHeaderV0.
-    static_assert(sizeof(metadata->header) > sizeof(LpMetadataHeaderV1_0));
+    static_assert(sizeof(metadata->header) > sizeof(LpMetadataHeaderV1_0), "");
     memset(reinterpret_cast<uint8_t*>(&metadata->header) + sizeof(LpMetadataHeaderV1_0), 0,
            sizeof(metadata->header) - sizeof(LpMetadataHeaderV1_0));
 

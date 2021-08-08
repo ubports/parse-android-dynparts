@@ -26,7 +26,6 @@
 #include <limits>
 #include <sstream>
 #include <string>
-#include <string_view>
 
 #include <liblp/liblp.h>
 
@@ -68,8 +67,8 @@ void SHA256(const void* data, size_t length, uint8_t out[32]);
 // have to be a power of two. Return false on overflow.
 template <typename T>
 bool AlignTo(T base, uint32_t alignment, T* out) {
-    static_assert(std::numeric_limits<T>::is_integer);
-    static_assert(!std::numeric_limits<T>::is_signed);
+    static_assert(std::numeric_limits<T>::is_integer, "");
+    static_assert(!std::numeric_limits<T>::is_signed, "");
     if (!alignment) {
         *out = base;
         return true;

@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <sstream>
-#include <string_view>
 
 using namespace android::fs_mgr;
 
@@ -10,7 +9,7 @@ using std::cerr;
 using std::cout;
 using std::endl;
 
-constexpr std::string_view kDmPrefix = "dynpart-";
+const std::string kDmPrefix = "dynpart-";
 
 int main(int argc, char* argv[]) {
   if (argc != 2) {

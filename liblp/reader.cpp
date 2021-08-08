@@ -71,7 +71,7 @@ class MemoryReader final : public Reader {
 };
 
 bool ParseGeometry(const void* buffer, LpMetadataGeometry* geometry) {
-    static_assert(sizeof(*geometry) <= LP_METADATA_GEOMETRY_SIZE);
+    static_assert(sizeof(*geometry) <= LP_METADATA_GEOMETRY_SIZE, "");
     memcpy(geometry, buffer, sizeof(*geometry));
 
     // Check the magic signature.
