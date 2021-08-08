@@ -41,15 +41,15 @@ int main(int argc, char* argv[]) {
 
     std::ostringstream line;
     bool read_only = partition.attributes & LP_PARTITION_ATTR_READONLY;
-    line << kDmPrefix << GetPartitionName(partition) << ",,,"
-         << (read_only ? "ro" : "rw");
+    line << "dmsetup create " << GetPartitionName(partition) << " <<EOF\n"; /*<< ",,,"
+         << (read_only ? "ro" : "rw");*/
 
     uint64_t sector = 0;
     for (size_t i = 0; i < partition.num_extents; i++) {
       const auto& extent = metadata->extents[partition.first_extent_index + i];
       switch (extent.target_type) {
         case LP_TARGET_TYPE_ZERO:
-          line << "," << sector << " " << extent.num_sectors << " zero";
+          line << sector << " " << extent.num_sectors << " zero" << "\n";
           break;
         case LP_TARGET_TYPE_LINEAR: {
           if (extent.target_source != 0) {
@@ -58,8 +58,8 @@ int main(int argc, char* argv[]) {
             return 1;
           }
 
-          line << "," << sector << " " << extent.num_sectors << " linear "
-               << argv[1] << " " << extent.target_data;
+          line << sector << " " << extent.num_sectors << " linear "
+               << argv[1] << " " << extent.target_data << "\n";
           break;
         }
         default:
@@ -69,8 +69,9 @@ int main(int argc, char* argv[]) {
       }
       sector += extent.num_sectors;
     }
+    line << "EOF";
 
-    if (!table.empty()) table += ";";
+    if (!table.empty()) table += "\n";
     table += line.str();
   }
 
