@@ -9,4 +9,4 @@ add_subdirectory(liblp)
 
 add_executable(parse-android-dynparts main.cpp)
 target_compile_options(parse-android-dynparts PRIVATE -Wall -Wextra -pedantic)
-target_link_libraries(parse-android-dynparts PRIVATE lp)
+target_link_libraries(parse-android-dynparts PRIVATE lp -static)
